@@ -112,6 +112,7 @@ alias zshrc='vim ~/.zshrc'
 alias bashrc='vim ~/.bashrc'
 alias tu='ssh siddharth.bidasaria@supporttunnel.colo.rubrik.com'
 alias genj='./tools/bzl_tools/build/gen_intellij_deps.sh'
+alias szshrc='source ~/.zshrc'
 function placeOrder() { ~/sdmain/lab/bin/bodega place order 'rktest_yml(location=COLO, platform='"$1"')';}
 function gd() { git diff "@"; }
 function cluster() { ~/sdmain/deployment/cluster.sh "$1" "$2"; }
