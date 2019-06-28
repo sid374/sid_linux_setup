@@ -1,22 +1,13 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH="$PATH:/Users/siddharthbidasaria/rubrik/arc/arcanist/bin"
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/siddharthbidasaria/.oh-my-zsh" 
+  export ZSH="/home/ubuntu/.oh-my-zsh"
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-#ZSH_THEME="agnoster"
-ZSH_THEME="powerlevel10k/powerlevel10k"
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(custom_host_name dir vcs) 
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator time history battery)
-POWERLEVEL9K_CUSTOM_HOST_NAME="echo LOCAL"
-POWERLEVEL9K_CUSTOM_HOST_NAME_BACKGROUND="178"
-
-# ZSH_THEME="miloshadzic"
+ZSH_THEME="robbyrussell"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -53,7 +44,7 @@ POWERLEVEL9K_CUSTOM_HOST_NAME_BACKGROUND="178"
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
-DISABLE_UNTRACKED_FILES_DIRTY="true"
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -71,7 +62,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git, vi-mode, history-substring-search
+  git, vi-mode
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -98,7 +89,7 @@ source $ZSH/oh-my-zsh.sh
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
 
-bindkey -v
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
@@ -108,7 +99,7 @@ bindkey -v
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 # Sid's aliases
 alias coloDev='ssh ubuntu@10.0.65.104'
-alias coloDev2='ssh ubuntu@10.0.40.184'
+alias coloDev2='ssh ubuntu@10.0.66.70'
 alias co='git checkout'
 alias br='git branch'
 alias st='git status'
@@ -121,10 +112,7 @@ alias zshrc='vim ~/.zshrc'
 alias bashrc='vim ~/.bashrc'
 alias tu='ssh siddharth.bidasaria@supporttunnel.colo.rubrik.com'
 alias genj='./tools/bzl_tools/build/gen_intellij_deps.sh'
-alias gendeps='./tools/bzl_tools/build/gen_intellij_deps.sh'
 alias szshrc='source ~/.zshrc'
-alias clonesdmain='git clone git@github.com:scaledata/sdmain.git'
-alias vpncon='globalprotect connect --portal vpn-colo3.rubrik.com'
 function placeOrder() { ~/sdmain/lab/bin/bodega place order 'rktest_yml(location=COLO, platform='"$1"')';}
 function gd() { git diff "@"; }
 function cluster() { ~/sdmain/deployment/cluster.sh "$1" "$2"; }
@@ -139,28 +127,29 @@ function bco() { ~/sdmain/lab/bin/bodega consume order "$@"; }
 function bls() { ~/sdmain/lab/bin/bodega list orders; }
 
 # Docker Aliases
-alias stop5.1='( cd ~/rubrik/workspaces/5.1/sdmain/deployment/docker/dev && docker-sync stop && ./stop.sh )'
-alias stopmaster='( cd ~/rubrik/workspaces/master/sdmain/deployment/docker/dev && docker-sync stop && ./stop.sh )'
+alias stop4.1='~/workspaces/4.1/sdmain/deployment/docker/dev/stop.sh'
+alias stop4.2='~/workspaces/4.2/sdmain/deployment/docker/dev/stop.sh'
+alias stopmaster='~/workspaces/master/sdmain/deployment/docker/dev/stop.sh'
 
-alias start5.1='( cd ~/rubrik/workspaces/5.1/sdmain/deployment/docker/dev && docker-sync start && ./start.sh )'
-alias startmaster='( cd ~/rubrik/workspaces/master/sdmain/deployment/docker/dev && docker-sync start && ./start.sh )'
+alias start4.1='~/workspaces/4.1/sdmain/deployment/docker/dev/start.sh'
+alias start4.2='~/workspaces/4.2/sdmain/deployment/docker/dev/start.sh'
+alias startmaster='~/workspaces/master/sdmain/deployment/docker/dev/start.sh'
 
-alias exec5.1='~/rubrik/workspaces/5.1/sdmain/deployment/docker/dev/exec.sh'
-alias execmaster='~/rubrik/workspaces/master/sdmain/deployment/docker/dev/exec.sh'
+alias exec4.1='~/workspaces/4.1/sdmain/deployment/docker/dev/exec.sh'
+alias exec4.2='~/workspaces/4.2/sdmain/deployment/docker/dev/exec.sh'
+alias execmaster='~/workspaces/master/sdmain/deployment/docker/dev/exec.sh'
 
-alias status5.1='~/workspaces/5.1/sdmain/deployment/docker/dev/status.sh'
+alias status4.1='~/workspaces/4.1/sdmain/deployment/docker/dev/status.sh'
+alias status4.2='~/workspaces/4.2/sdmain/deployment/docker/dev/status.sh'
 alias statusmaster='~/workspaces/master/sdmain/deployment/docker/dev/status.sh'
 
-alias go5.1='start5.1 && exec5.1'
-alias gomaster='startmaster && execmaster'
-
-alias rbk='cd /Users/siddharthbidasaria/rubrik'
-alias clonesdmain='git clone --recurse-submodules git@github.com:scaledata/sdmain.git'
-alias dps='docker ps'
+alias go4.1='stopmaster && stop4.2 && start4.1 && exec4.1'
+alias go4.2='stopmaster && stop4.1 && start4.2 && exec4.2'
+alias gomaster='stop4.1 && stop4.2 && startmaster && execmaster'
 
 function portforward() {
 ssh -L$3:localhost:$3 siddharth.bidasaria@supporttunnel03.colo.rubrik.com -t /opt/rubrik/src/scripts/infra/tunnel/tunnel.py forward $1 $2 --local_port $3 --node_port $4
 }
 
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/lib/arcanist/arcanist_wrapper:/usr/local/lib/eclipse:/usr/local/lib/zinc-0.3.5/bin:/usr/local/lib/byteman-download-3.0.6/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/lib/arcanist/arcanist_wrapper:/usr/local/lib/eclipse:/usr/local/lib/zinc-0.3.5/bin:/usr/local/lib/byteman-download-3.0.6/bin:/usr/local/lib/node-v8.4.0-linux-x64/bin/node:/usr/local/lib/node-v8.4.0-linux-x64/bin/:$PATH 
-eval "$(pyenv init -)"
+
